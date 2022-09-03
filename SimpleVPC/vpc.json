@@ -1,0 +1,59 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Resources" : {
+    "MyVPC" : {
+      "Type" : "AWS::EC2::VPC",
+      "Properties" : {
+      "CidrBlock" : "10.0.0.0/16",
+      "EnableDnsSupport" : "true",
+      "EnableDnsHostnames" : "true",
+        "InstanceTenancy" : "default",
+        "Tags" : [ {"Key" : "Name", "Value" : "My-VPC01"} ]
+      }
+    },
+    "MyIGW" : {
+      "Type" : "AWS::EC2::InternetGateway",
+      "Properties" : {
+        "Tags" : [ {"Key" : "Name", "Value" : "My-IGW01"}]
+      }
+    },
+    "MyAttachGateway" : {
+      "Type" : "AWS::EC2::VPCGatewayAttachment",
+      "Properties" : {
+        "VpcId" : { "Ref" : "MyVPC" },
+        "InternetGatewayId" : { "Ref" : "MyIGW" }
+      }
+    },
+    "MySubnet" : {
+      "Type" : "AWS::EC2::Subnet",
+      "Properties" : {
+        "VpcId" : { "Ref" : "MyVPC" },
+        "CidrBlock" : "10.0.0.0/20",
+        "AvailabilityZone" : "ap-northeast-1a",
+        "Tags" : [ { "Key" : "Name", "Value" : "My-Subnet01" } ]
+      }
+    },
+    "MyRouteTable" : {
+      "Type" : "AWS::EC2::RouteTable",
+      "Properties" : {
+        "VpcId" : { "Ref" : "MyVPC" },
+        "Tags" : [ { "Key" : "Name", "Value" : "My-Route01" } ]
+      }
+    },
+    "MySubnetAttache" : {
+      "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties" : {
+        "RouteTableId" : { "Ref" : "MyRouteTable" },
+        "SubnetId" : { "Ref" : "MySubnet" }
+      }
+    },
+    "MyRoute" : {
+      "Type" : "AWS::EC2::Route",
+      "Properties" : {
+        "RouteTableId" : { "Ref" : "MyRouteTable" },
+        "DestinationCidrBlock" : "0.0.0.0/0",
+        "GatewayId" : { "Ref" : "MyIGW" }
+      }
+    }
+  }
+}
