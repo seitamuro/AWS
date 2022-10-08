@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Read code on GitHub
+
+Parameters:
+  url:
+    Type: String
+    Description: Link to HTML to pull
+    Default: https://raw.githubusercontent.com/seitamuro/AWS/master/uploadToS3/upload_success.txt
+
+Resources:
+  TargetBucket:
+    Type: AWS::S3::Bucket
+
+  CodeOnGitHub:
+    Type: AWS::S3::Object
+    Properties:
+      Target:
+        Bucket: !REF TargetBucket
+        Key: index.html
+      Body: Fn::ImportValue !Ref url
