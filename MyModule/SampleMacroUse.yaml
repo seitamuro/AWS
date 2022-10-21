@@ -1,0 +1,20 @@
+# https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
+Transform:
+  - MyMacro
+  - 'AWS::Serverless'
+
+Resources:
+  WaitCondition:
+    Type: "AWS::CloudFormation::WaitCondition"
+
+  MyBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: MyBucket
+      Tags: [{"key": "value"}]
+      CorsConfiguration: []
+
+  MyEc2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageID: "ami-123"
