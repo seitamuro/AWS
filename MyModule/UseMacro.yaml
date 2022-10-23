@@ -1,0 +1,13 @@
+# トップレベルで使用
+# テンプレートの全てが変換対称
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: [MyMacro, "AWS::Server-less-2016-10-31"]
+
+# インライン変換で使用
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  Type: "AWS::S3::Bucket"
+  Fn::Transform:
+    Name: MyMacro
+    Parameters:
+      Key: value

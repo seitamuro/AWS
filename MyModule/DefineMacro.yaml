@@ -1,0 +1,26 @@
+# マクロの定義
+Type: "AWS::CloudFormation::Macro"
+Properties:
+  Description: String
+  FunctionName: String
+  LogGroupName: String
+  LogRoleARN: String
+  Name: String
+
+# マクロへの入力
+#{
+#  "region": "<リージョン>",
+#  "accountId": "<AWS アカウントID>",
+#  "fragment": { ... },
+#  "transformId": "<自動採択されたTRANSFORM_ID>",
+#  "params": "<インライン変換の場合はParametersで渡されたパラメータが設定されている>",
+#  "requestId": "<自動採択されたREQUEST_ID>",
+#  "templateParameterValues": "<テンプレード内で指定されたParameters>"
+#}
+
+# 自作のLambdaが返すJSON
+#{
+#  "requestID": "<イベントで渡されたリクエストID>",
+#  "status": "success",
+#  "fragment": {...}
+#}
