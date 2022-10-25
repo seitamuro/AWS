@@ -1,0 +1,15 @@
+# aws cloudformation package --template-file macro.yml  --s3-bucket <デプロイに利用するS3バケット名> --output-template-file macro-output.yml
+# aws cloudformation deploy --template-file macro-output.yml --stack-name <スタック名> --capabilities CAPABILITY_IAM
+Transform: "AWS::Server-less-2016-10-31"
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.6
+      CodeUri: .
+      Handler: index.handler
+  Macro:
+    Type: "AWS::CloudFormation::Macro"
+    Properties:
+      Name: MyMacro
+      FunctionName: !GetAtt Function.Arn
