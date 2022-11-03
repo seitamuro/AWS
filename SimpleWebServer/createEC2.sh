@@ -1,0 +1,1 @@
+aws ec2 create-security-group --group-name sample-sg --description "Sample Security Group"
