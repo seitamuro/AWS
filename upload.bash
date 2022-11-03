@@ -1,0 +1,2 @@
+aws cloudformation package --template-file ./macro.yaml --s3-bucket deploy-macro --output-template-file macro-output.yaml
+aws cloudformation deploy --template-file macro-output.yaml --stack-name stack4 --capabilities CAPABILITY_IAM   
