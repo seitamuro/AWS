@@ -1,1 +1,1 @@
-aws ec2 run-instances --image-id
+aws ec2 run-instances --image-id resolve:ssm:/aws/service/ami-amazon-linux-latest/amazon2-ami-hvm-x86_64-gp2 --instance-type t2.micro
